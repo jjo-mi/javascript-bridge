@@ -1,5 +1,5 @@
 const GAUID_MESSAGE = {
-    STRAT: "다리 건너기 게임을 시작합니다.",
+    START: "다리 건너기 게임을 시작합니다.",
 }
 
 const INPUT_MESSAGE = {
@@ -20,4 +20,4 @@ const ERROR_MESSAGE = {
     RETRY: "[ERROR] 입력시 (재시도: R, 종료: Q) 영어 대문자로만 입력해야합니다.",
 }
 
-module.exports = { GAUID_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE }
+module.exports = { GAUID_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE };
