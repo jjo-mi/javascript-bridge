@@ -6,6 +6,7 @@ class App {
   play() {
     OutputView.printStart();
     const bridgeSize = InputView.readBridgeSize();
+    // const move = InputView.readMoving();
 
   }
 

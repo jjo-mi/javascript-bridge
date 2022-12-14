@@ -3,7 +3,6 @@ const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
 const BridgeMaker = require("./BridgeMaker");
 
 
-
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -15,6 +14,7 @@ const InputView = {
       this.validateSize(inputSize);
       const bridgeArr = BridgeMaker.makeBridge(inputSize, BridgeMaker.generateRandomNumber);
       console.log('###다리', bridgeArr);
+      this.readMoving();
     });
   },
 
@@ -30,11 +30,26 @@ const InputView = {
   },
 
 
-
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  readMoving() {
+    Console.readLine(INPUT_MESSAGE.MOVE, (inputMove) => {
+      this.validateMove(inputMove);
+      // let moveArr = callback;
+    });
+  },
+
+  validateMove(inputMove) {
+    try {
+      if(inputMove !== "U" && inputMove !== "D") {
+        throw new Error(ERROR_MESSAGE.MOVE);
+      }
+    } catch(e) {
+      Console.print(ERROR_MESSAGE.MOVE);
+      this.readMoving();
+    }
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
