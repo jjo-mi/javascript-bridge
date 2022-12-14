@@ -1,15 +1,17 @@
 const OutputView = require("./OutputView");
-// const { GAUID_MESSAGE } = require("./Constant");
-
-
+const InputView = require("./InputView");
 
 
 class App {
   play() {
-    // console.log(GAUID_MESSAGE.START);
     OutputView.printStart();
+    const bridgeSize = InputView.readBridgeSize();
+    // console.log('###3', bridgeSize);
+
   }
 }
+
+
 
 const app = new App;
 app.play();
