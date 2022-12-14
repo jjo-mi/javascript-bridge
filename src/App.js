@@ -52,11 +52,9 @@ class App {
   inputMove() {
     InputView.readMoving(inputMove => {
       this.validateMove(inputMove);
-      // 정답 다리와 비교하는 함수를 여기서 부르기
-
       const movingResult = this.bridgeGame.move(this.bridgeArr[this.bridgeArrIndexNum], inputMove);
       // this.bridgeArrIndexNum++;
-      // console.log(currentBridge);
+      let currentResult = OutputView.printMap(this.bridgeGame.upResult, this.bridgeGame.downResult); 
 
     })
 

@@ -10,10 +10,18 @@ const InputView = require("./InputView");
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
-  constructor(bridgeArr,inputMove) {
+  constructor() {
     this.currentUpResult = [];
     this.currentDownResult = [];
     // this.bridgeArrIndexNum = 0;
+  }
+
+  get upResult() {
+    return this.currentUpResult;
+  }
+
+  get downResult() {
+    return this.currentDownResult;
   }
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
@@ -28,8 +36,8 @@ class BridgeGame {
       // this.bridgeArrIndexNum++;
     }
     this.compareCase(inputMove, result);
-    console.log("###up", this.currentUpResult);
-    console.log("###down", this.currentDownResult);
+    // console.log("###up", this.currentUpResult);
+    // console.log("###down", this.currentDownResult);
     return this.currentDownResult, this.currentUpResult;
   }
 
