@@ -4,17 +4,22 @@ const OutputView = require("./OutputView");
 const InputView = require("./InputView");
 const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
 const BridgeMaker = require("./BridgeMaker");
-const { generateRandomNumber } = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
 
 
 
 class App {
   bridgeArr;
+  size = 0;
+  bridgeArr = [];
 
   constructor() {
-    this.size = 0;
-    this.bridgeArr = [];
+    // this.size = 0;
+    // this.bridgeArr = [];
+    this.bridgeGame = new BridgeGame();
+    this.bridgeArrIndexNum = 0;
   }
+
   play() {
     OutputView.printStart();
     this.inputSize();
@@ -48,6 +53,11 @@ class App {
     InputView.readMoving(inputMove => {
       this.validateMove(inputMove);
       // 정답 다리와 비교하는 함수를 여기서 부르기
+
+      const movingResult = this.bridgeGame.move(this.bridgeArr[this.bridgeArrIndexNum], inputMove);
+      // this.bridgeArrIndexNum++;
+      // console.log(currentBridge);
+
     })
 
   }
