@@ -1,6 +1,7 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
 const BridgeMaker = require("./BridgeMaker");
+const BridgeGame = require("./BridgeGame");
 
 
 /**
@@ -8,35 +9,27 @@ const BridgeMaker = require("./BridgeMaker");
  */
 const InputView = {
   /** 2. 다리길이 입력 받기 */
-  readBridgeSize() {
-    Console.readLine(INPUT_MESSAGE.LENGTH, (callback) => {
-      let inputSize = Number(callback);
-      this.validateSize(inputSize);
-      const bridgeArr = BridgeMaker.makeBridge(inputSize, BridgeMaker.generateRandomNumber);
-      console.log('###다리', bridgeArr);
-      this.readMoving();
-    });
+  readBridgeSize(callback) {
+    Console.readLine(INPUT_MESSAGE.LENGTH, callback);
+
+
+      // let inputSize = Number(callback);
+      // this.validateSize(inputSize);
+      // const bridgeArr = BridgeMaker.makeBridge(inputSize, BridgeMaker.generateRandomNumber);
+      // console.log('###다리', bridgeArr);
+      // this.readMoving();
   },
 
-  validateSize(inputSize) {
-    try {
-      if(inputSize < 3 || inputSize > 20) {
-        throw new Error(ERROR_MESSAGE.LENGTH);
-      }
-    } catch(e) {
-      Console.print(ERROR_MESSAGE.LENGTH);
-      this.readBridgeSize();
-    }
-  },
+  
 
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {
-    Console.readLine(INPUT_MESSAGE.MOVE, (inputMove) => {
+  readMoving(callback) {
+    Console.readLine(INPUT_MESSAGE.MOVE, (callback) => {
       this.validateMove(inputMove);
-      // let moveArr = callback;
+      let result = new BridgeGame;
     });
   },
 
