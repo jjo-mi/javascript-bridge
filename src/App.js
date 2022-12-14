@@ -28,8 +28,7 @@ class App {
       this.validateSize(this.size);
       this.bridgeArr = BridgeMaker.makeBridge(this.size,BridgeRandomNumberGenerator.generate);
       console.log('###다리', this.bridgeArr);
-
-      
+      this.inputMove();
     })
 
   }
@@ -42,6 +41,25 @@ class App {
     } catch(e) {
       Console.print(ERROR_MESSAGE.LENGTH);
       this.inputSize();
+    }
+  }
+
+  inputMove() {
+    InputView.readMoving(inputMove => {
+      this.validateMove(inputMove);
+      // 정답 다리와 비교하는 함수를 여기서 부르기
+    })
+
+  }
+
+  validateMove(inputMove) {
+    try {
+      if(inputMove !== "U" && inputMove !== "D") {
+        throw new Error(ERROR_MESSAGE.MOVE);
+      }
+    } catch(e) {
+      Console.print(ERROR_MESSAGE.MOVE);
+      this.inputMove();
     }
   }
 

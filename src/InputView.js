@@ -27,22 +27,12 @@ const InputView = {
    * 사용자가 이동할 칸을 입력받는다.
    */
   readMoving(callback) {
-    Console.readLine(INPUT_MESSAGE.MOVE, (callback) => {
-      this.validateMove(inputMove);
-      let result = new BridgeGame;
-    });
+    Console.readLine(INPUT_MESSAGE.MOVE, callback); 
+      // this.validateMove(inputMove);
+      // let result = new BridgeGame;
   },
 
-  validateMove(inputMove) {
-    try {
-      if(inputMove !== "U" && inputMove !== "D") {
-        throw new Error(ERROR_MESSAGE.MOVE);
-      }
-    } catch(e) {
-      Console.print(ERROR_MESSAGE.MOVE);
-      this.readMoving();
-    }
-  },
+ 
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
