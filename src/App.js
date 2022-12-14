@@ -6,9 +6,11 @@ class App {
   play() {
     OutputView.printStart();
     const bridgeSize = InputView.readBridgeSize();
-    // console.log('###3', bridgeSize);
 
   }
+
+
+
 }
 
 

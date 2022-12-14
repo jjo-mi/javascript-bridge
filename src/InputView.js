@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { ERROR_MESSAGE } = require("./Constant");
-const { INPUT_MESSAGE } = require("./Constant");
+const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
+const BridgeMaker = require("./BridgeMaker");
 
 
 
@@ -12,9 +12,9 @@ const InputView = {
   readBridgeSize() {
     Console.readLine(INPUT_MESSAGE.LENGTH, (callback) => {
       let inputSize = Number(callback);
-      console.log('###2', typeof inputSize);
       this.validateSize(inputSize);
-      return inputSize;
+      const bridgeArr = BridgeMaker.makeBridge(inputSize, BridgeMaker.generateRandomNumber);
+      console.log('###다리', bridgeArr);
     });
   },
 
