@@ -1,6 +1,6 @@
-const { generateRandomNumber } = require("./BridgeMaker");
-const BridgeMaker = require("./BridgeMaker");
-const InputView = require("./InputView");
+// const { generateRandomNumber } = require("./BridgeMaker");
+// const BridgeMaker = require("./BridgeMaker");
+// const InputView = require("./InputView");
 
 
 /**
@@ -57,6 +57,7 @@ class BridgeGame {
     this.currentUpResult.pop();
     this.currentDownResult.pop();
   }
+
 }
 
 module.exports = BridgeGame;

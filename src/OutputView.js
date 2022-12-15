@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { GAUID_MESSAGE } = require("./Constant");
+const { GAUID_MESSAGE, OUTPUT_MESSAGE } = require("./Constant");
 // const BridgeGame = require("./BridgeGame");
 
 
@@ -26,7 +26,21 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {},
+  printResult(upResult, downResult, tryCount) {
+    Console.print(OUTPUT_MESSAGE.TITLE);
+    Console.print(this.printMap(upResult, downResult));
+    Console.print(OUTPUT_MESSAGE.ISSUCCESS + this.isSuccess(upResult, downResult));
+    Console.print(OUTPUT_MESSAGE.TRYCOUNT + tryCount);
+
+  },
+
+  isSuccess(upResult, downResult) {
+    let isSuccess = "성공";
+    if(upResult.includes("X") || downResult.includes("X")) {
+      isSuccess = "실패"
+    }
+    return isSuccess;
+  }
 };
 
 module.exports = OutputView;

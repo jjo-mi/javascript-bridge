@@ -19,6 +19,7 @@ class App {
     // this.bridgeArr = [];
     this.bridgeGame = new BridgeGame();
     this.bridgeArrIndexNum = 0;
+    this.tryCount = 1;
   }
 
   play() {
@@ -52,6 +53,7 @@ class App {
   repeatInputMove() {
     InputView.readMoving(inputMove => {
       try {
+        // size만큼 돌았으면 최종결과값 나오게 하기
         this.validateMove(inputMove);
         this.handleResultOfMove(inputMove);
       } catch (e) {
@@ -65,8 +67,7 @@ class App {
   /** 입력값 비교해서 정답 여부 안내 */
   handleResultOfMove(inputMove) {
     const movingResult = this.bridgeGame.move(this.bridgeArr[this.bridgeArrIndexNum], inputMove);
-    let currentResult = OutputView.printMap(this.bridgeGame.upResult, this.bridgeGame.downResult);
-    console.log('###result', movingResult);
+    let printCurrentResult = OutputView.printMap(this.bridgeGame.upResult, this.bridgeGame.downResult);
     if(movingResult == "O") {
       this.bridgeArrIndexNum++;
       this.repeatInputMove();
@@ -85,17 +86,22 @@ class App {
       this.repeatInputMove();
     }
   }
-
+  /** 비교한 결과가 X면, 재시작 여부 묻고
+   * R이면 Bridge.js 의 위 아래 다리 X가 있는 다리 줄 삭제하고
+   * repeat로 다시 시작
+   */
   retry() {
     InputView.readGameCommand(input => {
       this.validateRetry(input);
       if(input == "R") {
         this.bridgeGame.retry();
+        this.tryCount++;
         this.repeatInputMove();
       } else if(input == "Q") {
-        console.log("###아직, 게임최종결과 출력 만드는 중")
+        OutputView.isSuccess(this.bridgeGame.upResult, this.bridgeGame.downResult);
+        OutputView.printResult(this.bridgeGame.upResult, this.bridgeGame.downResult, this.tryCount);
+        // console.log("###아직, 게임최종결과 출력 만드는 중")
       }
-
     })
   }
 
