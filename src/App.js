@@ -2,7 +2,7 @@ const { Console } = require("@woowacourse/mission-utils");
 const BridgeRandomNumberGenerator = require("./BridgeRandomNumberGenerator");
 const OutputView = require("./OutputView");
 const InputView = require("./InputView");
-const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
+const { ERROR_MESSAGE } = require("./Constant");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
 const { readBridgeSize } = require("./InputView");
@@ -58,14 +58,6 @@ class App {
         Console.print(e.message)
         this.repeatInputMove();
       }
-
-    // while(this.bridgeArrIndexNum !== this.size) {
-    //   this.inputMove();
-    //   this.bridgeArrIndexNum++;
-    //   if(this.bridgeArrIndexNum == this.size){
-    //     break; 
-    //   }
-    // }
     })
   }
 
@@ -78,8 +70,8 @@ class App {
     if(movingResult == "O") {
       this.bridgeArrIndexNum++;
       this.repeatInputMove();
-    // } else if(movingResult == "X") {
-    //   //retry
+    } else if(movingResult == "X") {
+      this.retry();
     }
   }
 
@@ -92,6 +84,31 @@ class App {
       Console.print(ERROR_MESSAGE.MOVE);
       this.repeatInputMove();
     }
+  }
+
+  retry() {
+    InputView.readGameCommand(input => {
+      this.validateRetry(input);
+      if(input == "R") {
+        this.bridgeGame.retry();
+        this.repeatInputMove();
+      } else if(input == "Q") {
+        console.log("###아직, 게임최종결과 출력 만드는 중")
+      }
+
+    })
+  }
+
+  validateRetry(input){
+    try {
+      if(input !== "R" && input !== "Q") {
+        throw new Error(ERROR_MESSAGE.RETRY);
+      }
+    } catch (error) {
+      Console.print(e.message);
+      this.retry();
+    }
+
   }
 
 
