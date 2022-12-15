@@ -3,9 +3,6 @@ const BridgeMaker = require("./BridgeMaker");
 const InputView = require("./InputView");
 
 
-
-// const bridgeArr = BridgeMaker.makeBridge(InputView.inputSize, generateRandomNumber);
-
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
@@ -29,16 +26,13 @@ class BridgeGame {
    * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
   move(currentBridge, inputMove) {
-    // const inputMove = InputView.readMoving();
-    let result = "x";
+    let result = "X";
     if(currentBridge === inputMove) {
-      result = "o"
+      result = "O"
       // this.bridgeArrIndexNum++;
     }
     this.compareCase(inputMove, result);
-    // console.log("###up", this.currentUpResult);
-    // console.log("###down", this.currentDownResult);
-    return this.currentDownResult, this.currentUpResult;
+    return result;
   }
 
   compareCase(inputMove, result) {

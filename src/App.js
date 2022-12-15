@@ -5,6 +5,7 @@ const InputView = require("./InputView");
 const { ERROR_MESSAGE, INPUT_MESSAGE } = require("./Constant");
 const BridgeMaker = require("./BridgeMaker");
 const BridgeGame = require("./BridgeGame");
+const { readBridgeSize } = require("./InputView");
 
 
 
@@ -33,9 +34,8 @@ class App {
       this.validateSize(this.size);
       this.bridgeArr = BridgeMaker.makeBridge(this.size,BridgeRandomNumberGenerator.generate);
       console.log('###다리', this.bridgeArr);
-      this.inputMove();
+      this.repeatInputMove();
     })
-
   }
 
   validateSize(size) {
@@ -49,15 +49,38 @@ class App {
     }
   }
 
-  inputMove() {
+  repeatInputMove() {
     InputView.readMoving(inputMove => {
-      this.validateMove(inputMove);
-      const movingResult = this.bridgeGame.move(this.bridgeArr[this.bridgeArrIndexNum], inputMove);
-      // this.bridgeArrIndexNum++;
-      let currentResult = OutputView.printMap(this.bridgeGame.upResult, this.bridgeGame.downResult); 
+      try {
+        this.validateMove(inputMove);
+        this.handleResultOfMove(inputMove);
+      } catch (e) {
+        Console.print(e.message)
+        this.repeatInputMove();
+      }
 
+    // while(this.bridgeArrIndexNum !== this.size) {
+    //   this.inputMove();
+    //   this.bridgeArrIndexNum++;
+    //   if(this.bridgeArrIndexNum == this.size){
+    //     break; 
+    //   }
+    // }
     })
+  }
 
+
+  /** 입력값 비교해서 정답 여부 안내 */
+  handleResultOfMove(inputMove) {
+    const movingResult = this.bridgeGame.move(this.bridgeArr[this.bridgeArrIndexNum], inputMove);
+    let currentResult = OutputView.printMap(this.bridgeGame.upResult, this.bridgeGame.downResult);
+    console.log('###result', movingResult);
+    if(movingResult == "O") {
+      this.bridgeArrIndexNum++;
+      this.repeatInputMove();
+    // } else if(movingResult == "X") {
+    //   //retry
+    }
   }
 
   validateMove(inputMove) {
@@ -67,7 +90,7 @@ class App {
       }
     } catch(e) {
       Console.print(ERROR_MESSAGE.MOVE);
-      this.inputMove();
+      this.repeatInputMove();
     }
   }
 
